@@ -1,0 +1,27 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Bree+Serif&family=Caveat:wght@400;700&family=Lobster&family=Monoton&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display+SC:ital,wght@0,400;0,700;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,700&family=Work+Sans:ital,wght@0,400;0,700;1,700&display=swap");
+
+.con{
+background-image: url("https://images.firstpost.com/wp-content/uploads/2022/06/640-x-363-2022-06-08T143903.402.jpg?impolicy=website&width=1200&height=800");
+height: 110vh;
+background-size: cover;
+}
+
+.con1{
+background-image: url("https://premion.com/wp-content/uploads/2022/05/PREMION_Media_Post_Data_JG_social-02-768x384.png");
+height: 120vh;
+background-size: cover;
+}
+
+.background{
+    background-color: black;
+    height: 110vh;
+}
+
+.button1{
+    margin: 10px;
+}
+
+.start-text{
+    font-size: 30px;
+}

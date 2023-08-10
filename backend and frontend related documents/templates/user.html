@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OTT Homepage</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+    crossorigin="anonymous">
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    defer
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../static/background.css">
+        <link ... href="{{ url_for('static', filename='static/background.css') }}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="con1">
+  <div
+    class=" ">
+    <h1 class=" text-center m-2">OTT</h1>
+  </div>
+  <div class="text-center d-flex container float-end">
+    <h1 style="padding-left:100px; color: #111111;">Welcome {{ name }}</h1>
+    <div>
+    <a href="/delete_account" class="btn btn-danger"
+      style="margin-left: 100px;height:40px">
+      Delete account</a>
+    <a href="/" class="mx-2 btn btn-info"
+      style="height:40px">
+      Log out</a>
+  </div>
+  </div>
+  <div class="container w-50">
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="d-flex w-70">
+      <h2 class="mx-3 text-white">Your Preference List</h2>
+      <button class="mx-3 btn btn-success text-center" style="height:40px ;">Add Preference List</button>
+    </div>
+    <table class="table text-white">
+      <thead>
+        <tr >
+          <th scope="col" class="w-25 text-white">#</th>
+          <th scope="col" class="w-25 text-white">Content_id</th>
+          <th scope="col" class="w-25 text-white">Creator_id</th>
+          <th scope="col" class="w-25 text-white">Star_id</th>
+          <th scope="col" class="w-25 text-white">Language_id</th>
+          <th scope="col" class="w-25 text-white">Genre_id</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in range(pre_list|length) %}
+        <tr>
+          <th scope="row">{{i+1}}</th>
+          <td>{{pre_list[i][2]}}</td>
+          <td>{{pre_list[i][3]}}</td>
+          <td>{{pre_list[i][4]}}</td>
+          <td>{{pre_list[i][5]}}</td>
+          <td>{{pre_list[i][6]}}</td>
+          
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="container text-center m-3">
+    {% if is_premium %}
+    <button class="mx-1 btn btn-success text-center" style="height:40px ;">Subscribed to premium</button>
+    {% else  %}
+    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Subscribe to Premium
+    </button>
+    {% endif %}
+  </div>
+  <div class="text-center container border border-black p-3">
+    <button class="btn btn-primary" style="margin-bottom: 10px;" onclick="get_all_photos()">My Groups</button>
+    <div class="container text-white">
+      <table class="table text-white">
+        <thead class="table text-white">
+          <tr class="text-white">
+            <th class="text-white">#</th>
+            <th class="text-white">group_id</th>
+            <th class="text-white">group_name</th>
+            <th class="text-white">created_on</th>
+          </tr>
+        </thead>
+        <tbody id="photos_table">
+
+        </tbody>
+    </table>
+    </div>
+  </div>
+  <br>
+  <br>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Enter details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/premium" method="post">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Credit card Number</label>
+              <input name="credit_card"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter credit_card">
+            
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">subscription period</label>
+              <input name='subscription_period' type="number" class="form-control" id="exampleInputPassword1" placeholder="Enter number of years">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <script>
+    async function get_all_photos() {
+      const host = window.location.protocol + '//' + window.location.host;
+      const response = await fetch(`${host}/get_all_photos`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      });
+      let json=await response.json();
+      console.log(json)
+      loadTableData(json)
+    }
+    function loadTableData(items) {
+      const table = document.getElementById("photos_table");
+      let i=0;
+      var rowCount = table.rows.length; 
+      for(var x=0;x<rowCount;x++)
+      table.deleteRow(0)
+      items.forEach( item => {
+        let row = table.insertRow();
+        let no = row.insertCell(0);
+        // console.log(no)
+        no.innerHTML = i+1;
+        i=i+1;
+        let group_id=row.insertCell(1);
+        group_id.innerHTML = item[1];
+        let group_name = row.insertCell(2);
+        group_name.innerHTML = item[2];
+        let date= row.insertCell(3);
+        date.innerHTML = item[3];
+        
+      });
+    }
+  </script>
+</body>
+</html>
